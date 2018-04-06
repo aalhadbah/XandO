@@ -10,6 +10,7 @@ const char BLANK = ' ';
 const char X = 'X';
 const char O = 'O';
 const int QUIT = -1;
+char Winner = ' ';
 
 int main()
 {
@@ -64,14 +65,42 @@ int main()
                                 turn = X;
                         }
 
+                } cout<<"\nBOARD\n-----\n";
+
+                for(int r = 0; r < 3; r++)
+                {
+                    for(int c = 0; c < 3; c++)
+                    {
+                        cout<<board[r][c]<<" ";
+                    }
+                    cout<<"\n";
+                }
+                
+                if(' ' != board[0][0] && board[0][0] == board[0][1] && board[0][0] == board[0][2] ||' ' != board[0][0] && board[0][0] == board[1][0] && board[0][0] == board[2][0] ||' ' != board[0][0] && board[0][0] == board[1][1] && board[0][0] == board[2][2] ) 
+               {
+                 Winner = board[0][0];
+                 playing = false;
+                 cout<<"Winner is "<<Winner<<endl;
+
+               }
 
 
+               else if (' ' != board[2][2] && board[2][2] == board[1][2] && board[2][2] == board[0][2] ||' ' != board[2][2] && board[2][2] == board[2][0] && board[2][2] == board[2][1] )
+
+               {
+
+                    Winner = board[2][2];
+                    playing = false;
+                    cout<<"Winner is "<<Winner<<endl;
+               }
+                else if(' ' != board[1][1] && board[1][1] == board[0][1] && board[1][1] == board[2][1] ||' ' != board[1][1] && board[1][1] == board[1][0] && board[1][1] == board[1][2] ||' ' != board[1][1] && board[1][1] == board[2][0] && board[1][1] == board[0][2]) 
+                {
+                    Winner = board[1][1];
+                    playing = false;
+                    cout<<"Winner is "<<Winner<<endl;
                 }
 
-
-
-
-                cout<<"\nBOARD\n-----\n";
+                // cout<<"\nBOARDS\n-----\n";                
                 //TODO: Print the current board
                 //Outline
                 //1. Traverse through each row, calling the current row r
@@ -80,22 +109,13 @@ int main()
                 //1-A-2. Display a space
                 //1-B. Display an newline to move to the next row of the board
 
-                for(int r = 0; r < 3; r++)
+
+                if(row == -1 && column == -1)
                 {
-
-                  for(int c = 0; c < 3; c++)
-                 {
-
-                 cout<<board[r][c]<<" ";
-                
-                }
-                   cout<<"\n";
-
+                    playing = false;
                 }
 
-
-
-        }while( row != -1 && column != -1 );
+        }while( playing );
 
         cout<<"Goodbye!\n";
 
